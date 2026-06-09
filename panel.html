@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academia Cristina Fernández</title>
+<style>
+  :root {
+    --ink: #1c1b18;
+    --ink-soft: #6b6860;
+    --ink-faint: #b0afa8;
+    --paper: #f7f5f0;
+    --paper-warm: #eceae3;
+    --accent: #8b5e3c;
+    --accent-light: #f0e4d7;
+    --green: #4a7c59;
+    --green-light: #ddeee3;
+    --red: #c0392b;
+    --red-light: #fde8e6;
+    --border: #dddbd4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--ink);
+    color: #fff;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-title {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .header-subtitle {
+    font-size: 11px;
+    color: #888;
+    margin-top: 1px;
+  }
+  .header-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #4caf50;
+  }
+
+  /* NAV TABS */
+  nav {
+    background: var(--ink);
+    border-top: 0.5px solid #333;
+    display: flex;
+    overflow-x: auto;
+    padding: 0 16px;
+    gap: 4px;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .tab {
+    flex-shrink: 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #888;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color 0.15s;
+  }
+  .tab.active {
+    color: #fff;
+    border-bottom-color: var(--accent);
+  }
+
+  /* MAIN */
+  main { padding: 16px; max-width: 600px; margin: 0 auto; }
+
+  /* SECTION */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* CARDS */
+  .card {
+    background: #fff;
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .card-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+
+  /* STAT GRID */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .stat-card {
+    background: #fff;
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-bottom: 4px;
+  }
+  .stat-value {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .stat-value.accent { color: var(--accent); }
+  .stat-value.green { color: var(--green); }
+  .stat-sub {
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-top: 4px;
+  }
+
+  /* GROUP LIST */
+  .grupo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 0.5px solid var(--paper-warm);
+  }
+  .grupo-item:last-child { border-bottom: none; }
+  .grupo-nombre {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .grupo-dia {
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-top: 2px;
+  }
+  .grupo-count {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .pill {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--paper-warm);
+    color: var(--ink-soft);
+  }
+  .pill.lleno {
+    background: var(--red-light);
+    color: var(--red);
+  }
+  .pill.casi {
+    background: #fef3cd;
+    color: #856404;
+  }
+  .pill.ok {
+    background: var(--green-light);
+    color: var(--green);
+  }
+
+  /* ALUMNO LIST */
+  .alumno-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 0.5px solid var(--paper-warm);
+  }
+  .alumno-item:last-child { border-bottom: none; }
+  .avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .alumno-nombre {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .alumno-tutor {
+    font-size: 12px;
+    color: var(--ink-faint);
+    margin-top: 1px;
+  }
+  .alumno-cuota {
+    margin-left: auto;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    flex-shrink: 0;
+  }
+
+  /* SEARCH */
+  .search-wrap {
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .search-wrap input {
+    width: 100%;
+    padding: 10px 14px 10px 36px;
+    font-size: 14px;
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--ink);
+  }
+  .search-wrap input:focus { outline: none; border-color: var(--accent); }
+  .search-icon {
+    position: absolute;
+    left: 12px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--ink-faint);
+    font-size: 14px;
+  }
+
+  /* FINANCE */
+  .finance-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 0.5px solid var(--paper-warm);
+    font-size: 14px;
+  }
+  .finance-row:last-child { border-bottom: none; }
+  .finance-label { color: var(--ink-soft); }
+  .finance-value { font-weight: 500; color: var(--ink); }
+  .finance-value.positivo { color: var(--green); }
+  .finance-value.negativo { color: var(--red); }
+  .finance-section-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding: 14px 0 6px;
+  }
+
+  /* LOADING */
+  .loading {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--ink-faint);
+    font-size: 14px;
+  }
+  .spinner {
+    width: 24px; height: 24px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 12px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* DAY FILTER */
+  .day-filter {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    margin-bottom: 12px;
+    padding-bottom: 2px;
+  }
+  .day-filter::-webkit-scrollbar { display: none; }
+  .day-btn {
+    flex-shrink: 0;
+    padding: 6px 14px;
+    font-size: 13px;
+    border-radius: 20px;
+    border: 0.5px solid var(--border);
+    background: #fff;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+  .day-btn.active {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+
+  .empty {
+    text-align: center;
+    padding: 30px;
+    color: var(--ink-faint);
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="header-title">Academia Cristina</div>
+    <div class="header-subtitle">Panel de gestión</div>
+  </div>
+  <div class="header-dot" id="status-dot" title="Conectado"></div>
+</header>
+
+<nav>
+  <div class="tab active" onclick="showTab('resumen')">Resumen</div>
+  <div class="tab" onclick="showTab('grupos')">Grupos</div>
+  <div class="tab" onclick="showTab('alumnos')">Alumnos</div>
+  <div class="tab" onclick="showTab('finanzas')">Finanzas</div>
+</nav>
+
+<main>
+
+  <!-- RESUMEN -->
+  <div class="section active" id="tab-resumen">
+    <div id="resumen-content">
+      <div class="loading"><div class="spinner"></div>Cargando datos...</div>
+    </div>
+  </div>
+
+  <!-- GRUPOS -->
+  <div class="section" id="tab-grupos">
+    <div class="day-filter" id="day-filter"></div>
+    <div id="grupos-content">
+      <div class="loading"><div class="spinner"></div>Cargando grupos...</div>
+    </div>
+  </div>
+
+  <!-- ALUMNOS -->
+  <div class="section" id="tab-alumnos">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="Buscar alumno..." oninput="filterAlumnos()">
+    </div>
+    <div id="alumnos-content">
+      <div class="loading"><div class="spinner"></div>Cargando alumnos...</div>
+    </div>
+  </div>
+
+  <!-- FINANZAS -->
+  <div class="section" id="tab-finanzas">
+    <div id="finanzas-content">
+      <div class="loading"><div class="spinner"></div>Cargando finanzas...</div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+const SUPABASE_URL = 'https://qifyxxfbuwfhjuupdzgg.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_GQTT572veKLxJScBWny-bg_tVDXiurY';
+
+let allData = { alumnos: [], grupos: [], matriculas: [] };
+let activeDay = 'Todos';
+
+async function fetchAll() {
+  try {
+    const headers = {
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY
+    };
+
+    const [alumnosRes, gruposRes, matriculasRes] = await Promise.all([
+      fetch(SUPABASE_URL + '/rest/v1/alumnos?select=*&order=nombre', { headers }),
+      fetch(SUPABASE_URL + '/rest/v1/grupos?select=*&order=id', { headers }),
+      fetch(SUPABASE_URL + '/rest/v1/matriculas?select=*', { headers })
+    ]);
+
+    allData.alumnos = await alumnosRes.json();
+    allData.grupos = await gruposRes.json();
+    allData.matriculas = await matriculasRes.json();
+
+    document.getElementById('status-dot').style.background = '#4caf50';
+    renderAll();
+  } catch(e) {
+    document.getElementById('status-dot').style.background = '#c0392b';
+    document.getElementById('resumen-content').innerHTML = '<div class="empty">Error al conectar con la base de datos.</div>';
+  }
+}
+
+function renderAll() {
+  renderResumen();
+  renderGrupos();
+  renderAlumnos();
+  renderFinanzas();
+}
+
+function renderResumen() {
+  const total = allData.alumnos.length;
+  const menores = allData.alumnos.filter(a => a.es_menor).length;
+  const adultos = total - menores;
+  const ingresos = allData.matriculas.reduce((s, m) => s + parseFloat(m.cuota_final || 0), 0);
+  const grupos = allData.grupos.length;
+
+  document.getElementById('resumen-content').innerHTML = `
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">Alumnos totales</div>
+        <div class="stat-value accent">${total}</div>
+        <div class="stat-sub">${adultos} adultos · ${menores} niños</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Ingresos mes</div>
+        <div class="stat-value green">${ingresos.toFixed(0)}€</div>
+        <div class="stat-sub">cuotas mensuales</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Grupos activos</div>
+        <div class="stat-value">${grupos}</div>
+        <div class="stat-sub">lunes a viernes</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Media por grupo</div>
+        <div class="stat-value">${grupos ? Math.round(allData.matriculas.length / grupos) : 0}</div>
+        <div class="stat-sub">alumnos/grupo</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Grupos con más alumnos</div>
+      ${allData.grupos.slice(0,5).map(g => {
+        const count = allData.matriculas.filter(m => m.grupo_id === g.id).length;
+        const pct = Math.round(count / 15 * 100);
+        return `
+          <div class="grupo-item">
+            <div>
+              <div class="grupo-nombre">${g.nombre}</div>
+            </div>
+            <div class="pill ${count >= 15 ? 'lleno' : count >= 12 ? 'casi' : 'ok'}">${count} alumnos</div>
+          </div>`;
+      }).join('')}
+    </div>
+  `;
+}
+
+function renderGrupos() {
+  const dias = ['Todos', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
+  const filterEl = document.getElementById('day-filter');
+  filterEl.innerHTML = dias.map(d =>
+    `<button class="day-btn ${d === activeDay ? 'active' : ''}" onclick="setDay('${d}')">${d}</button>`
+  ).join('');
+
+  const filtered = activeDay === 'Todos'
+    ? allData.grupos
+    : allData.grupos.filter(g => g.dia === activeDay);
+
+  if (!filtered.length) {
+    document.getElementById('grupos-content').innerHTML = '<div class="empty">No hay grupos para este día.</div>';
+    return;
+  }
+
+  document.getElementById('grupos-content').innerHTML = filtered.map(g => {
+    const alumnos = allData.matriculas
+      .filter(m => m.grupo_id === g.id)
+      .map(m => allData.alumnos.find(a => a.id === m.alumno_id))
+      .filter(Boolean);
+    const count = alumnos.length;
+
+    return `
+      <div class="card">
+        <div class="card-title">${g.nombre}
+          <span class="pill ${count >= 15 ? 'lleno' : count >= 12 ? 'casi' : 'ok'}" style="float:right;margin-top:-2px">${count}/15</span>
+        </div>
+        ${alumnos.map(a => `
+          <div class="alumno-item">
+            <div class="avatar">${a.nombre.charAt(0)}</div>
+            <div>
+              <div class="alumno-nombre">${a.nombre}</div>
+              ${a.nombre_tutor ? `<div class="alumno-tutor">Tutor: ${a.nombre_tutor}</div>` : ''}
+            </div>
+          </div>
+        `).join('')}
+        ${count === 0 ? '<div class="empty" style="padding:16px 0">Sin alumnos asignados</div>' : ''}
+      </div>`;
+  }).join('');
+}
+
+function setDay(day) {
+  activeDay = day;
+  renderGrupos();
+}
+
+let alumnosFiltrados = [];
+function renderAlumnos(filtro = '') {
+  alumnosFiltrados = filtro
+    ? allData.alumnos.filter(a => a.nombre.toLowerCase().includes(filtro.toLowerCase()))
+    : allData.alumnos;
+
+  if (!alumnosFiltrados.length) {
+    document.getElementById('alumnos-content').innerHTML = '<div class="empty">No se encontraron alumnos.</div>';
+    return;
+  }
+
+  document.getElementById('alumnos-content').innerHTML = `
+    <div class="card">
+      <div class="card-title">${alumnosFiltrados.length} alumnos</div>
+      ${alumnosFiltrados.map(a => {
+        const mat = allData.matriculas.find(m => m.alumno_id === a.id);
+        const grupo = mat ? allData.grupos.find(g => g.id === mat.grupo_id) : null;
+        return `
+          <div class="alumno-item">
+            <div class="avatar">${a.nombre.charAt(0)}</div>
+            <div style="flex:1;min-width:0">
+              <div class="alumno-nombre">${a.nombre}</div>
+              <div class="alumno-tutor">${grupo ? grupo.nombre : 'Sin grupo'}</div>
+              ${a.nombre_tutor ? `<div class="alumno-tutor">Tutor: ${a.nombre_tutor}</div>` : ''}
+            </div>
+            <div class="alumno-cuota">${mat ? mat.cuota_final + '€' : '-'}</div>
+          </div>`;
+      }).join('')}
+    </div>`;
+}
+
+function filterAlumnos() {
+  renderAlumnos(document.getElementById('search-input').value);
+}
+
+function renderFinanzas() {
+  const ingresos = allData.matriculas.reduce((s, m) => s + parseFloat(m.cuota_final || 0), 0);
+  const gastosFijos = 3179.22;
+  const beneficio = ingresos - gastosFijos;
+
+  document.getElementById('finanzas-content').innerHTML = `
+    <div class="card">
+      <div class="card-title">Resumen mensual</div>
+      <div class="finance-section-title">Ingresos</div>
+      <div class="finance-row">
+        <span class="finance-label">Clases (${allData.matriculas.length} alumnos)</span>
+        <span class="finance-value positivo">${ingresos.toFixed(2)}€</span>
+      </div>
+      <div class="finance-section-title">Gastos fijos</div>
+      <div class="finance-row">
+        <span class="finance-label">Total gastos</span>
+        <span class="finance-value negativo">${gastosFijos.toFixed(2)}€</span>
+      </div>
+      <div class="finance-section-title">Resultado</div>
+      <div class="finance-row" style="font-weight:600">
+        <span class="finance-label">Beneficio neto</span>
+        <span class="finance-value ${beneficio >= 0 ? 'positivo' : 'negativo'}">${beneficio.toFixed(2)}€</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Desglose de cuotas</div>
+      <div class="finance-row">
+        <span class="finance-label">Adultos 2h (57€)</span>
+        <span class="finance-value">${allData.matriculas.filter(m => parseFloat(m.cuota_final) === 57).length} alumnos</span>
+      </div>
+      <div class="finance-row">
+        <span class="finance-label">Niños 2h (52€)</span>
+        <span class="finance-value">${allData.matriculas.filter(m => parseFloat(m.cuota_final) === 52).length} alumnos</span>
+      </div>
+      <div class="finance-row">
+        <span class="finance-label">Adultos 3h (77€)</span>
+        <span class="finance-value">${allData.matriculas.filter(m => parseFloat(m.cuota_final) === 77).length} alumnos</span>
+      </div>
+      <div class="finance-row">
+        <span class="finance-label">Otras cuotas</span>
+        <span class="finance-value">${allData.matriculas.filter(m => ![52,57,77].includes(parseFloat(m.cuota_final))).length} alumnos</span>
+      </div>
+    </div>
+  `;
+}
+
+function showTab(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+fetchAll();
+</script>
+</body>
+</html>
