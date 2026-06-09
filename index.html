@@ -10,165 +10,94 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: #f5f4f0;
     color: #1a1a1a;
-    padding-bottom: 100px;
+    padding-bottom: 120px;
   }
   header {
     background: #2c2c2a;
     color: #fff;
-    padding: 20px 16px 16px;
+    padding: 20px 16px 14px;
     position: sticky;
     top: 0;
     z-index: 10;
   }
-  header h1 {
-    font-size: 17px;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-  }
-  header p {
-    font-size: 13px;
-    color: #aaa;
-    margin-top: 3px;
-  }
-  .progress-bar-wrap {
-    background: #444;
-    border-radius: 4px;
-    height: 4px;
-    margin-top: 10px;
-  }
-  .progress-bar {
-    background: #c8a96e;
-    height: 4px;
-    border-radius: 4px;
-    transition: width 0.3s;
-    width: 0%;
-  }
-  .progress-label {
-    font-size: 12px;
-    color: #aaa;
-    margin-top: 5px;
-  }
+  header h1 { font-size: 17px; font-weight: 500; }
+  header p { font-size: 13px; color: #aaa; margin-top: 3px; }
+  .progress-bar-wrap { background: #444; border-radius: 4px; height: 4px; margin-top: 10px; }
+  .progress-bar { background: #c8a96e; height: 4px; border-radius: 4px; transition: width 0.3s; width: 0%; }
+  .progress-label { font-size: 12px; color: #aaa; margin-top: 5px; }
   .section-title {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #888;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #888;
     padding: 18px 16px 8px;
   }
   .card {
-    background: #fff;
-    margin: 0 12px 10px;
-    border-radius: 12px;
-    padding: 14px 14px 12px;
+    background: #fff; margin: 0 12px 10px;
+    border-radius: 12px; padding: 14px 14px 12px;
     border: 0.5px solid #e0dfd8;
   }
+  .card.asignado { border-color: #b8d89a; }
   .card-name {
-    font-size: 15px;
-    font-weight: 500;
-    color: #1a1a1a;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .badge-menor {
-    font-size: 11px;
-    background: #faeeda;
-    color: #854f0b;
-    padding: 2px 8px;
-    border-radius: 20px;
-    font-weight: 400;
+    font-size: 15px; font-weight: 500; color: #1a1a1a;
+    margin-bottom: 10px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
   }
   .badge-ok {
-    font-size: 11px;
-    background: #eaf3de;
-    color: #3b6d11;
-    padding: 2px 8px;
-    border-radius: 20px;
-    font-weight: 400;
+    font-size: 11px; background: #eaf3de; color: #3b6d11;
+    padding: 2px 8px; border-radius: 20px; font-weight: 400;
+  }
+  .badge-padre {
+    font-size: 11px; background: #e6f1fb; color: #185fa5;
+    padding: 2px 8px; border-radius: 20px; font-weight: 400;
   }
   select {
-    width: 100%;
-    font-size: 14px;
-    padding: 10px 12px;
-    border: 0.5px solid #d0cfc8;
-    border-radius: 8px;
-    background: #f9f8f5;
-    color: #1a1a1a;
-    appearance: none;
+    width: 100%; font-size: 14px; padding: 10px 12px;
+    border: 0.5px solid #d0cfc8; border-radius: 8px;
+    background: #f9f8f5; color: #1a1a1a; appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%23888' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
+    background-repeat: no-repeat; background-position: right 12px center;
   }
   select:focus { outline: none; border-color: #c8a96e; }
-  .tutor-row {
-    display: none;
-    margin-top: 8px;
-    gap: 8px;
-    align-items: center;
+  .padre-toggle {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 10px; cursor: pointer;
   }
-  .tutor-row label {
-    font-size: 13px;
-    color: #888;
-    white-space: nowrap;
+  .padre-toggle input[type=checkbox] { width: 18px; height: 18px; cursor: pointer; }
+  .padre-toggle label { font-size: 13px; color: #888; cursor: pointer; }
+  .hijo-row {
+    display: none; margin-top: 8px; gap: 8px; align-items: center;
   }
-  .tutor-row input {
-    flex: 1;
-    font-size: 14px;
-    padding: 9px 12px;
-    border: 0.5px solid #d0cfc8;
-    border-radius: 8px;
-    background: #f9f8f5;
-    color: #1a1a1a;
+  .hijo-row label { font-size: 13px; color: #888; white-space: nowrap; }
+  .hijo-row input {
+    flex: 1; font-size: 14px; padding: 9px 12px;
+    border: 0.5px solid #d0cfc8; border-radius: 8px;
+    background: #f9f8f5; color: #1a1a1a;
   }
-  .tutor-row input:focus { outline: none; border-color: #c8a96e; }
+  .hijo-row input:focus { outline: none; border-color: #c8a96e; }
   .btn-exportar {
-    position: fixed;
-    bottom: 20px;
-    left: 16px;
-    right: 16px;
-    padding: 16px;
-    font-size: 16px;
-    font-weight: 500;
-    background: #2c2c2a;
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    letter-spacing: -0.01em;
+    position: fixed; bottom: 20px; left: 16px; right: 16px;
+    padding: 16px; font-size: 16px; font-weight: 500;
+    background: #2c2c2a; color: #fff; border: none;
+    border-radius: 12px; cursor: pointer;
   }
   .btn-exportar:active { opacity: 0.85; }
   .resultado {
-    display: none;
-    background: #fff;
-    margin: 12px;
-    border-radius: 12px;
-    padding: 16px;
+    display: none; background: #fff; margin: 12px;
+    border-radius: 12px; padding: 16px;
     border: 0.5px solid #e0dfd8;
-    font-size: 13px;
-    line-height: 1.7;
-    white-space: pre-wrap;
-    color: #1a1a1a;
+    font-size: 13px; line-height: 1.7;
+    white-space: pre-wrap; color: #1a1a1a;
   }
-  .resultado h3 {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 8px;
-    color: #2c2c2a;
+  .resultado h3 { font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+  .warning-box {
+    background: #faeeda; border: 0.5px solid #f0c070;
+    border-radius: 10px; padding: 12px 14px;
+    margin: 12px 12px 0; font-size: 13px; color: #854f0b;
+    display: none;
   }
   .copy-btn {
-    display: block;
-    width: 100%;
-    margin-top: 12px;
-    padding: 12px;
-    font-size: 14px;
-    background: #f5f4f0;
-    border: 0.5px solid #d0cfc8;
-    border-radius: 8px;
-    cursor: pointer;
-    color: #1a1a1a;
-    font-weight: 500;
+    display: block; width: 100%; margin-top: 12px; padding: 12px;
+    font-size: 14px; background: #f5f4f0;
+    border: 0.5px solid #d0cfc8; border-radius: 8px;
+    cursor: pointer; color: #1a1a1a; font-weight: 500;
   }
 </style>
 </head>
@@ -177,191 +106,135 @@
 <header>
   <h1>Asignación de grupos</h1>
   <p>Academia Cristina Fernández</p>
-  <div class="progress-bar-wrap">
-    <div class="progress-bar" id="progress-bar"></div>
-  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar"></div></div>
   <div class="progress-label" id="progress-label">0 de 65 asignados</div>
 </header>
 
+<div class="warning-box" id="warning-box"></div>
 <div id="lista"></div>
 <div class="resultado" id="resultado">
-  <h3>Resultado</h3>
+  <h3>Resumen de asignaciones</h3>
   <div id="resultado-texto"></div>
   <button class="copy-btn" onclick="copiar()">Copiar texto</button>
 </div>
-
 <button class="btn-exportar" onclick="exportar()">Ver resumen</button>
 
 <script>
 const grupos = [
   "Sin asignar",
-  "Lunes 16:30-18:30",
-  "Lunes 18:30-20:30",
+  "Lunes 16:30-18:30","Lunes 18:30-20:30",
   "Martes 17:30-19:30 (niños)",
-  "Miércoles 10:00-13:30",
-  "Miércoles 16:00-18:30",
-  "Miércoles 18:30-20:30",
-  "Jueves 10:00-12:00",
-  "Jueves 17:30-19:30 (niños)",
+  "Miércoles 10:00-13:30","Miércoles 16:00-18:30","Miércoles 18:30-20:30",
+  "Jueves 10:00-12:00","Jueves 17:30-19:30 (niños)",
   "Viernes 16:30-19:30 (niños)"
 ];
 
 const alumnos = [
-  {nombre:"Ana Rodriguez Puime", menor:false},
-  {nombre:"Andrea Gutierrez Perez", menor:true},
-  {nombre:"Antonio Aguete Estevez", menor:false},
-  {nombre:"Belen Garcia Balado", menor:true},
-  {nombre:"Belen Suarez Masso", menor:false},
-  {nombre:"Carmelina Gonzalez Ramos", menor:false},
-  {nombre:"Carolina Rodriguez Mena", menor:false},
-  {nombre:"Cristina Soto Fernandez-Tapias", menor:false},
-  {nombre:"Emilia Otero Sotelo", menor:false},
-  {nombre:"Jesusa Casal Carreiro", menor:false},
-  {nombre:"Juan Manuel Villapun", menor:false},
-  {nombre:"Julio Del Rio Pampillon", menor:false},
-  {nombre:"Maria De Los Angeles Redondo Villa", menor:false},
-  {nombre:"Maria Luz Insua Rodriguez", menor:false},
-  {nombre:"Maria Ponce Rios", menor:false},
-  {nombre:"Maria Soledad Alonso Cerqueira", menor:false},
-  {nombre:"Matilde Alvarez Rodriguez", menor:false},
-  {nombre:"Mayte Rodriguez Longa", menor:false},
-  {nombre:"Mercedes Gonzalez Cortiñas", menor:false},
-  {nombre:"Rebeca Fernandez Riveiro", menor:false},
-  {nombre:"Teresa Montenegro Gonzalez", menor:false},
-  {nombre:"Patricia Pastor Rodriguez", menor:true},
-  {nombre:"Eva Lugo Alvarez", menor:false},
-  {nombre:"Auri Perez Camiño", menor:true},
-  {nombre:"Lorena Serrano Prego", menor:true},
-  {nombre:"Jaime Estrada Briz", menor:false},
-  {nombre:"Begoña Moledo Eiras", menor:true},
-  {nombre:"Ana Ares Fernandez", menor:true},
-  {nombre:"Patricia Martinez Fernandez", menor:true},
-  {nombre:"Laura Castells Fidalgo", menor:true},
-  {nombre:"Maria Del Carmen Acedo Prieto", menor:true},
-  {nombre:"Maria Milagros Gonzalez Huertas", menor:true},
-  {nombre:"Isabel Fernandez Vicente", menor:true},
-  {nombre:"Carmen Gomez Landin", menor:true},
-  {nombre:"Silvia Hinrichs Alvarez", menor:true},
-  {nombre:"Pablo Osuna Andrade", menor:false},
-  {nombre:"Luz Maria Gonzalez Dominguez", menor:false},
-  {nombre:"Patricia Sanchez Abeal", menor:true},
-  {nombre:"Luis Menarguez Cruz", menor:true},
-  {nombre:"Jose Manuel Pereira Prieto", menor:false},
-  {nombre:"Montserrat Terre Alonso", menor:true},
-  {nombre:"Vanessa Leigh Wardle", menor:true},
-  {nombre:"Valentina Ramirez Iglesias", menor:false},
-  {nombre:"Susana Santos Cabello", menor:true},
-  {nombre:"Lucia Giralt Calleja", menor:true},
-  {nombre:"Carmen Alonso Albo", menor:false},
-  {nombre:"Elisa Nadia Ojeda Castillo", menor:true},
-  {nombre:"Almudena Alonso Rodriguez", menor:true},
-  {nombre:"Rhoda Angeline Willians", menor:true},
-  {nombre:"Maria Muñoz Posse", menor:true},
-  {nombre:"Cristina Palacios Gomez De Membrillera", menor:true},
-  {nombre:"Maria Dolores Cameselle Villot", menor:true},
-  {nombre:"Maria Quiros Gomez", menor:true},
-  {nombre:"Paulina Balbuena Ramirez", menor:true},
-  {nombre:"Almudena Sanchez Fernandez", menor:true},
-  {nombre:"Patricia Gomez", menor:true},
-  {nombre:"Juan Manuel Fernandez Collazo", menor:false},
-  {nombre:"Maria Alonso Fernandez", menor:false},
-  {nombre:"Marcos Freire Garcia", menor:true},
-  {nombre:"Vanesa Ojeda", menor:false},
-  {nombre:"Alberto Soengas Fernandez", menor:true},
-  {nombre:"Maria Del Carmen Maneiro Bofill", menor:true},
-  {nombre:"Maria Isabel Lasarte Albornoz", menor:false},
-  {nombre:"Maria Cristina Justo Ibarra", menor:true},
-  {nombre:"Iria Lagaron Jimenez", menor:true}
+  "Ana Rodriguez Puime","Andrea Gutierrez Perez","Antonio Aguete Estevez",
+  "Belen Garcia Balado","Belen Suarez Masso","Carmelina Gonzalez Ramos",
+  "Carolina Rodriguez Mena","Cristina Soto Fernandez-Tapias","Emilia Otero Sotelo",
+  "Jesusa Casal Carreiro","Juan Manuel Villapun","Julio Del Rio Pampillon",
+  "Maria De Los Angeles Redondo Villa","Maria Luz Insua Rodriguez","Maria Ponce Rios",
+  "Maria Soledad Alonso Cerqueira","Matilde Alvarez Rodriguez","Mayte Rodriguez Longa",
+  "Mercedes Gonzalez Cortiñas","Rebeca Fernandez Riveiro","Teresa Montenegro Gonzalez",
+  "Patricia Pastor Rodriguez","Eva Lugo Alvarez","Auri Perez Camiño",
+  "Lorena Serrano Prego","Jaime Estrada Briz","Begoña Moledo Eiras",
+  "Ana Ares Fernandez","Patricia Martinez Fernandez","Laura Castells Fidalgo",
+  "Maria Del Carmen Acedo Prieto","Maria Milagros Gonzalez Huertas","Isabel Fernandez Vicente",
+  "Carmen Gomez Landin","Silvia Hinrichs Alvarez","Pablo Osuna Andrade",
+  "Luz Maria Gonzalez Dominguez","Patricia Sanchez Abeal","Luis Menarguez Cruz",
+  "Jose Manuel Pereira Prieto","Montserrat Terre Alonso","Vanessa Leigh Wardle",
+  "Valentina Ramirez Iglesias","Susana Santos Cabello","Lucia Giralt Calleja",
+  "Carmen Alonso Albo","Elisa Nadia Ojeda Castillo","Almudena Alonso Rodriguez",
+  "Rhoda Angeline Willians","Maria Muñoz Posse","Cristina Palacios Gomez De Membrillera",
+  "Maria Dolores Cameselle Villot","Maria Quiros Gomez","Paulina Balbuena Ramirez",
+  "Almudena Sanchez Fernandez","Patricia Gomez","Juan Manuel Fernandez Collazo",
+  "Maria Alonso Fernandez","Marcos Freire Garcia","Vanesa Ojeda",
+  "Alberto Soengas Fernandez","Maria Del Carmen Maneiro Bofill","Maria Isabel Lasarte Albornoz",
+  "Maria Cristina Justo Ibarra","Iria Lagaron Jimenez"
 ];
 
 const state = {};
-alumnos.forEach((a,i) => { state[i] = {grupo:"Sin asignar", tutor:""}; });
+alumnos.forEach((a,i) => { state[i] = {grupo:"Sin asignar", esPadre:false, hijo:""}; });
 
 function updateProgress() {
   const n = Object.values(state).filter(s => s.grupo !== "Sin asignar").length;
   const pct = Math.round(n / alumnos.length * 100);
   document.getElementById('progress-bar').style.width = pct + '%';
   document.getElementById('progress-label').textContent = n + ' de ' + alumnos.length + ' asignados';
+  const padres = Object.values(state).filter(s => s.esPadre).length;
+  const warn = document.getElementById('warning-box');
+  if (padres > 0) {
+    warn.style.display = 'block';
+    warn.textContent = '⚠ ' + padres + ' padre/madre marcado' + (padres > 1 ? 's' : '') + '. Revisa que no falte ningún menor.';
+  } else {
+    warn.style.display = 'none';
+  }
 }
 
-const dias = ["Lunes","Martes","Miércoles","Jueves","Viernes"];
-const gruposPorDia = {
-  "Lunes": ["Lunes 16:30-18:30","Lunes 18:30-20:30"],
-  "Martes": ["Martes 17:30-19:30 (niños)"],
-  "Miércoles": ["Miércoles 10:00-13:30","Miércoles 16:00-18:30","Miércoles 18:30-20:30"],
-  "Jueves": ["Jueves 10:00-12:00","Jueves 17:30-19:30 (niños)"],
-  "Viernes": ["Viernes 16:30-19:30 (niños)"]
-};
-
 const lista = document.getElementById('lista');
+lista.innerHTML = '<div class="section-title">Todos los alumnos (' + alumnos.length + ')</div>';
 
-const seccion = document.createElement('div');
-seccion.innerHTML = '<div class="section-title">Todos los alumnos</div>';
-lista.appendChild(seccion);
-
-alumnos.forEach((alumno, i) => {
+alumnos.forEach((nombre, i) => {
   const card = document.createElement('div');
   card.className = 'card';
   card.id = 'card-' + i;
 
   const nameRow = document.createElement('div');
   nameRow.className = 'card-name';
-  nameRow.textContent = alumno.nombre;
-  if (alumno.menor) {
-    const b = document.createElement('span');
-    b.className = 'badge-menor';
-    b.textContent = 'menor';
-    nameRow.appendChild(b);
-  }
+  nameRow.innerHTML = '<span class="nombre-text">' + nombre + '</span>';
 
   const sel = document.createElement('select');
-  const opt0 = document.createElement('option');
-  opt0.value = 'Sin asignar';
-  opt0.textContent = '— Seleccionar grupo —';
-  sel.appendChild(opt0);
-  grupos.slice(1).forEach(g => {
+  grupos.forEach(g => {
     const opt = document.createElement('option');
-    opt.value = g;
-    opt.textContent = g;
+    opt.value = g; opt.textContent = g === "Sin asignar" ? "— Seleccionar grupo —" : g;
     sel.appendChild(opt);
   });
-
-  const tutorRow = document.createElement('div');
-  tutorRow.className = 'tutor-row';
-  tutorRow.style.display = 'none';
-  const tLabel = document.createElement('label');
-  tLabel.textContent = 'Tutor/a:';
-  const tInput = document.createElement('input');
-  tInput.type = 'text';
-  tInput.placeholder = 'Nombre del padre o madre';
-  tInput.addEventListener('input', () => { state[i].tutor = tInput.value; });
-  tutorRow.appendChild(tLabel);
-  tutorRow.appendChild(tInput);
-
   sel.addEventListener('change', () => {
     state[i].grupo = sel.value;
-    if (alumno.menor && sel.value !== 'Sin asignar') {
-      tutorRow.style.display = 'flex';
-    } else {
-      tutorRow.style.display = 'none';
-    }
-    if (sel.value !== 'Sin asignar') {
-      if (!nameRow.querySelector('.badge-ok')) {
-        const ok = document.createElement('span');
-        ok.className = 'badge-ok';
-        ok.textContent = '✓';
-        nameRow.appendChild(ok);
-      }
-    } else {
-      const ok = nameRow.querySelector('.badge-ok');
-      if (ok) ok.remove();
-    }
+    card.className = sel.value !== "Sin asignar" ? 'card asignado' : 'card';
+    const ok = nameRow.querySelector('.badge-ok');
+    if (sel.value !== "Sin asignar") {
+      if (!ok) { const b = document.createElement('span'); b.className='badge-ok'; b.textContent='✓'; nameRow.appendChild(b); }
+    } else { if (ok) ok.remove(); }
     updateProgress();
   });
 
+  const padreToggle = document.createElement('div');
+  padreToggle.className = 'padre-toggle';
+  const chk = document.createElement('input');
+  chk.type = 'checkbox'; chk.id = 'padre-' + i;
+  const lbl = document.createElement('label');
+  lbl.htmlFor = 'padre-' + i;
+  lbl.textContent = 'Es padre/madre (alumno es menor)';
+
+  const hijoRow = document.createElement('div');
+  hijoRow.className = 'hijo-row';
+  hijoRow.style.display = 'none';
+  const hijoLabel = document.createElement('label');
+  hijoLabel.textContent = 'Nombre del hijo/a:';
+  const hijoInput = document.createElement('input');
+  hijoInput.type = 'text'; hijoInput.placeholder = 'Nombre completo del menor';
+  hijoInput.addEventListener('input', () => { state[i].hijo = hijoInput.value; });
+  hijoRow.appendChild(hijoLabel);
+  hijoRow.appendChild(hijoInput);
+
+  chk.addEventListener('change', () => {
+    state[i].esPadre = chk.checked;
+    hijoRow.style.display = chk.checked ? 'flex' : 'none';
+    const pb = nameRow.querySelector('.badge-padre');
+    if (chk.checked) {
+      if (!pb) { const b = document.createElement('span'); b.className='badge-padre'; b.textContent='padre/madre'; nameRow.appendChild(b); }
+    } else { if (pb) pb.remove(); }
+    updateProgress();
+  });
+
+  padreToggle.appendChild(chk);
+  padreToggle.appendChild(lbl);
   card.appendChild(nameRow);
   card.appendChild(sel);
-  card.appendChild(tutorRow);
+  card.appendChild(padreToggle);
+  card.appendChild(hijoRow);
   lista.appendChild(card);
 });
 
@@ -370,12 +243,15 @@ function exportar() {
   grupos.slice(1).forEach(g => {
     const enGrupo = alumnos.filter((a,i) => state[i].grupo === g);
     if (enGrupo.length > 0) {
-      texto += g.toUpperCase() + '\n';
-      enGrupo.forEach((a,_) => {
+      texto += g.toUpperCase() + ' (' + enGrupo.length + ' alumnos)\n';
+      enGrupo.forEach(a => {
         const idx = alumnos.indexOf(a);
-        texto += '  - ' + a.nombre;
-        if (state[idx].tutor) texto += ' (tutor: ' + state[idx].tutor + ')';
-        texto += '\n';
+        const s = state[idx];
+        if (s.esPadre) {
+          texto += '  - ' + a + ' [padre/madre de: ' + (s.hijo || 'SIN NOMBRE') + ']\n';
+        } else {
+          texto += '  - ' + a + '\n';
+        }
       });
       texto += '\n';
     }
@@ -383,7 +259,13 @@ function exportar() {
   const sinAsignar = alumnos.filter((a,i) => state[i].grupo === 'Sin asignar');
   if (sinAsignar.length > 0) {
     texto += 'SIN ASIGNAR (' + sinAsignar.length + '):\n';
-    sinAsignar.forEach(a => { texto += '  - ' + a.nombre + '\n'; });
+    sinAsignar.forEach(a => { texto += '  - ' + a + '\n'; });
+    texto += '\n';
+  }
+  const padresSinNombre = alumnos.filter((a,i) => state[i].esPadre && !state[i].hijo.trim());
+  if (padresSinNombre.length > 0) {
+    texto += '⚠ PADRES SIN NOMBRE DE HIJO (' + padresSinNombre.length + '):\n';
+    padresSinNombre.forEach(a => { texto += '  - ' + a + '\n'; });
   }
   document.getElementById('resultado-texto').textContent = texto;
   document.getElementById('resultado').style.display = 'block';
@@ -391,8 +273,7 @@ function exportar() {
 }
 
 function copiar() {
-  const texto = document.getElementById('resultado-texto').textContent;
-  navigator.clipboard.writeText(texto).then(() => {
+  navigator.clipboard.writeText(document.getElementById('resultado-texto').textContent).then(() => {
     document.querySelector('.copy-btn').textContent = '¡Copiado!';
     setTimeout(() => { document.querySelector('.copy-btn').textContent = 'Copiar texto'; }, 2000);
   });
