@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscripción – Academia Cristina Fernández</title>
+<style>
+  :root {
+    --ink: #1c1b18;
+    --ink-soft: #6b6860;
+    --ink-faint: #b0afa8;
+    --paper: #f7f5f0;
+    --paper-warm: #eceae3;
+    --accent: #8b5e3c;
+    --accent-light: #f0e4d7;
+    --green: #4a7c59;
+    --green-light: #ddeee3;
+    --border: #dddbd4;
+    --red: #c0392b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    padding-bottom: 40px;
+  }
+  header {
+    background: var(--ink);
+    color: #fff;
+    padding: 24px 20px 20px;
+    text-align: center;
+  }
+  .logo {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 6px;
+  }
+  header h1 {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  header p {
+    font-size: 13px;
+    color: #888;
+    margin-top: 4px;
+  }
+  .form-wrap {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 20px 16px;
+  }
+  .card {
+    background: #fff;
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 14px;
+  }
+  .card-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 16px;
+  }
+  .field {
+    margin-bottom: 14px;
+  }
+  .field:last-child { margin-bottom: 0; }
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  label .req { color: var(--accent); }
+  input[type=text],
+  input[type=email],
+  input[type=tel],
+  select,
+  textarea {
+    width: 100%;
+    font-size: 15px;
+    padding: 12px 14px;
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    background: var(--paper);
+    color: var(--ink);
+    appearance: none;
+    font-family: inherit;
+  }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%23888' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: #fff;
+  }
+  textarea { resize: none; height: 80px; }
+
+  /* RADIO GROUP */
+  .radio-group {
+    display: flex;
+    gap: 8px;
+  }
+  .radio-option {
+    flex: 1;
+    position: relative;
+  }
+  .radio-option input { display: none; }
+  .radio-option label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px;
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    background: var(--paper);
+    color: var(--ink-soft);
+    transition: all 0.12s;
+    margin: 0;
+  }
+  .radio-option input:checked + label {
+    border-color: var(--accent);
+    background: var(--accent-light);
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* CHECKBOX */
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px;
+    background: var(--paper);
+    border-radius: 10px;
+    border: 0.5px solid var(--border);
+  }
+  .checkbox-row input[type=checkbox] {
+    width: 18px; height: 18px;
+    margin-top: 1px;
+    flex-shrink: 0;
+    accent-color: var(--accent);
+  }
+  .checkbox-row span {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .checkbox-row a { color: var(--accent); }
+
+  /* HIDDEN */
+  .hidden { display: none; }
+
+  /* CUOTA PREVIEW */
+  .cuota-preview {
+    display: none;
+    background: var(--accent-light);
+    border: 0.5px solid #d4a574;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 10px;
+  }
+  .cuota-preview .cuota-label {
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .cuota-preview .cuota-value {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .cuota-preview .cuota-sub {
+    font-size: 12px;
+    color: var(--accent);
+    opacity: 0.7;
+    margin-top: 2px;
+  }
+
+  /* SUBMIT */
+  .btn-submit {
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 500;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    letter-spacing: -0.01em;
+    transition: opacity 0.15s;
+  }
+  .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-submit:active:not(:disabled) { opacity: 0.85; }
+
+  /* SUCCESS */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+  }
+  .success-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+  .success-title {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .success-sub {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* ERROR */
+  .error-msg {
+    display: none;
+    background: #fde8e6;
+    border: 0.5px solid #f5c6c2;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--red);
+    margin-bottom: 12px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Estudio de Dibujo y Pintura</div>
+  <h1>Inscripción de alumnos</h1>
+  <p>Rellena el formulario para reservar tu plaza</p>
+</header>
+
+<div class="form-wrap">
+
+  <div id="form-content">
+
+    <div class="error-msg" id="error-msg"></div>
+
+    <!-- DATOS PERSONALES -->
+    <div class="card">
+      <div class="card-title">Datos del alumno</div>
+
+      <div class="field">
+        <label>Nombre completo <span class="req">*</span></label>
+        <input type="text" id="nombre" placeholder="Nombre y apellidos" required>
+      </div>
+
+      <div class="field">
+        <label>Teléfono <span class="req">*</span></label>
+        <input type="tel" id="telefono" placeholder="600 000 000" required>
+      </div>
+
+      <div class="field">
+        <label>Correo electrónico</label>
+        <input type="email" id="email" placeholder="correo@ejemplo.com">
+      </div>
+    </div>
+
+    <!-- GRUPO -->
+    <div class="card">
+      <div class="card-title">Grupo y horario</div>
+
+      <div class="field">
+        <label>Selecciona tu grupo <span class="req">*</span></label>
+        <select id="grupo" onchange="updateCuota()">
+          <option value="">— Elige un horario —</option>
+          <optgroup label="Lunes">
+            <option value="1">Lunes 16:30–18:30</option>
+            <option value="2">Lunes 18:30–20:30</option>
+          </optgroup>
+          <optgroup label="Martes">
+            <option value="3">Martes 17:30–19:30 (niños)</option>
+          </optgroup>
+          <optgroup label="Miércoles">
+            <option value="4">Miércoles 10:00–13:30</option>
+            <option value="5">Miércoles 16:00–18:30</option>
+            <option value="6">Miércoles 18:30–20:30</option>
+          </optgroup>
+          <optgroup label="Jueves">
+            <option value="7">Jueves 10:00–12:00</option>
+            <option value="8">Jueves 17:30–19:30 (niños)</option>
+          </optgroup>
+          <optgroup label="Viernes">
+            <option value="9">Viernes 16:30–19:30 (niños)</option>
+          </optgroup>
+        </select>
+        <div class="cuota-preview" id="cuota-preview">
+          <div class="cuota-label">Cuota mensual</div>
+          <div class="cuota-value" id="cuota-value">—</div>
+          <div class="cuota-sub" id="cuota-sub"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MENOR -->
+    <div class="card">
+      <div class="card-title">¿Es menor de edad?</div>
+
+      <div class="field">
+        <div class="radio-group">
+          <div class="radio-option">
+            <input type="radio" name="menor" id="menor-no" value="no" checked onchange="toggleMenor()">
+            <label for="menor-no">No, soy adulto/a</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" name="menor" id="menor-si" value="si" onchange="toggleMenor()">
+            <label for="menor-si">Sí, soy menor</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="field hidden" id="tutor-field">
+        <label>Nombre del padre/madre o tutor <span class="req">*</span></label>
+        <input type="text" id="tutor" placeholder="Nombre completo del tutor/a">
+      </div>
+
+      <div class="field hidden" id="hermano-field">
+        <label>¿Tiene hermano/a apuntado en la academia?</label>
+        <div class="radio-group">
+          <div class="radio-option">
+            <input type="radio" name="hermano" id="hermano-no" value="no" checked>
+            <label for="hermano-no">No</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" name="hermano" id="hermano-si" value="si">
+            <label for="hermano-si">Sí (10% dto.)</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GDPR -->
+    <div class="card">
+      <div class="card-title">Protección de datos</div>
+      <div class="field">
+        <div class="checkbox-row">
+          <input type="checkbox" id="gdpr" onchange="checkForm()">
+          <span>Acepto el tratamiento de mis datos personales para la gestión de la matrícula y comunicaciones del estudio. Los datos no serán cedidos a terceros. <a href="#">Política de privacidad</a></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="error-msg" id="error-msg-bottom"></div>
+    <button class="btn-submit" id="btn-submit" onclick="enviar()" disabled>Enviar inscripción</button>
+
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-screen" id="success-screen">
+    <div class="success-icon">✅</div>
+    <div class="success-title">¡Inscripción recibida!</div>
+    <div class="success-sub">Gracias por apuntarte. En breve nos pondremos en contacto contigo para confirmar tu plaza.</div>
+  </div>
+
+</div>
+
+<script>
+const SUPABASE_URL = 'https://qifyxxfbuwfhjuupdzgg.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_GQTT572veKLxJScBWny-bg_tVDXiurY';
+
+const cuotas = {
+  1: { precio: 57, desc: 'Adultos · 2h semanales' },
+  2: { precio: 57, desc: 'Adultos · 2h semanales' },
+  3: { precio: 52, desc: 'Niños · 2h semanales' },
+  4: { precio: 77, desc: 'Adultos · 3h semanales' },
+  5: { precio: 57, desc: 'Adultos · 2h semanales' },
+  6: { precio: 57, desc: 'Adultos · 2h semanales' },
+  7: { precio: 57, desc: 'Adultos · 2h semanales' },
+  8: { precio: 52, desc: 'Niños · 2h semanales' },
+  9: { precio: 52, desc: 'Niños · 2h semanales' }
+};
+
+function updateCuota() {
+  const grupoId = parseInt(document.getElementById('grupo').value);
+  const preview = document.getElementById('cuota-preview');
+  if (grupoId && cuotas[grupoId]) {
+    const c = cuotas[grupoId];
+    document.getElementById('cuota-value').textContent = c.precio + '€/mes';
+    document.getElementById('cuota-sub').textContent = c.desc;
+    preview.style.display = 'block';
+  } else {
+    preview.style.display = 'none';
+  }
+  checkForm();
+}
+
+function toggleMenor() {
+  const esMenor = document.getElementById('menor-si').checked;
+  document.getElementById('tutor-field').classList.toggle('hidden', !esMenor);
+  document.getElementById('hermano-field').classList.toggle('hidden', false);
+  checkForm();
+}
+
+function checkForm() {
+  const nombre = document.getElementById('nombre').value.trim();
+  const telefono = document.getElementById('telefono').value.trim();
+  const grupo = document.getElementById('grupo').value;
+  const gdpr = document.getElementById('gdpr').checked;
+  const esMenor = document.getElementById('menor-si').checked;
+  const tutor = document.getElementById('tutor').value.trim();
+
+  const valid = nombre && telefono && grupo && gdpr && (!esMenor || tutor);
+  document.getElementById('btn-submit').disabled = !valid;
+}
+
+document.querySelectorAll('input, select').forEach(el => {
+  el.addEventListener('input', checkForm);
+  el.addEventListener('change', checkForm);
+});
+
+async function enviar() {
+  const btn = document.getElementById('btn-submit');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  const nombre = document.getElementById('nombre').value.trim();
+  const telefono = document.getElementById('telefono').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const grupoId = parseInt(document.getElementById('grupo').value);
+  const esMenor = document.getElementById('menor-si').checked;
+  const tutor = document.getElementById('tutor').value.trim();
+  const tieneHermano = document.getElementById('hermano-si').checked;
+  const gdpr = document.getElementById('gdpr').checked;
+
+  const cuota = cuotas[grupoId];
+  const descuento = tieneHermano ? 0.1 : 0;
+  const cuotaFinal = Math.round(cuota.precio * (1 - descuento) * 100) / 100;
+
+  try {
+    const headers = {
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation'
+    };
+
+    // Insert alumno
+    const alumnoRes = await fetch(SUPABASE_URL + '/rest/v1/alumnos', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        nombre, telefono, email: email || null,
+        es_menor: esMenor,
+        nombre_tutor: tutor || null,
+        tiene_hermano: tieneHermano,
+        gdpr_aceptado: gdpr,
+        activo: true
+      })
+    });
+
+    if (!alumnoRes.ok) throw new Error('Error al guardar alumno');
+    const [alumno] = await alumnoRes.json();
+
+    // Insert matricula
+    const matRes = await fetch(SUPABASE_URL + '/rest/v1/matriculas', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        alumno_id: alumno.id,
+        grupo_id: grupoId,
+        cuota_mensual: cuota.precio,
+        descuento,
+        cuota_final: cuotaFinal
+      })
+    });
+
+    if (!matRes.ok) throw new Error('Error al guardar matrícula');
+
+    document.getElementById('form-content').style.display = 'none';
+    document.getElementById('success-screen').style.display = 'block';
+
+  } catch(e) {
+    const errEl = document.getElementById('error-msg-bottom');
+    errEl.textContent = 'Ha habido un error al enviar. Inténtalo de nuevo.';
+    errEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Enviar inscripción';
+  }
+}
+</script>
+</body>
+</html>
